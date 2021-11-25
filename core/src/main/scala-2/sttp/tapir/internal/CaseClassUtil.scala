@@ -29,7 +29,7 @@ private[tapir] class CaseClassUtil[C <: blackbox.Context, T: C#WeakTypeTag](val 
   lazy val schema: Tree = c.typecheck(q"_root_.scala.Predef.implicitly[_root_.sttp.tapir.Schema[$t]]")
 
   lazy val classSymbol: ClassSymbol = t.typeSymbol.asClass
-  lazy val className: TermName = classSymbol.asType.name.toTermName
+  lazy val className: TermName = classSymbol.asType.fullName.toTermName
 
   def annotated(field: Symbol, annotationType: c.Type): Boolean =
     findAnnotation(field, annotationType).isDefined
